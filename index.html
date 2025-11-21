@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Snowbase Showdown - Official Rules</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #0b1724;
+      --card: #111c2b;
+      --accent: #4fc3f7;
+      --accent-soft: rgba(79, 195, 247, 0.2);
+      --text-main: #f5f7fb;
+      --text-muted: #c3c7d4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1a2940 0, #050912 55%, #020309 100%);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 1.5rem;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .title {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow: 0 0 15px rgba(79, 195, 247, 0.7);
+      margin-bottom: 0.35rem;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--accent-soft);
+      background: rgba(4, 12, 25, 0.85);
+      padding: 0.25rem 0.9rem;
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .snowflake {
+      filter: drop-shadow(0 0 4px rgba(79, 195, 247, 0.8));
+    }
+
+    .card {
+      background: rgba(7, 14, 28, 0.9);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      padding: 1.5rem 1.3rem;
+      margin-bottom: 1.2rem;
+      backdrop-filter: blur(12px);
+    }
+
+    @media (min-width: 720px) {
+      .card {
+        padding: 1.8rem 1.7rem;
+      }
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.7rem;
+      color: #e5f4ff;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+      margin-bottom: 0.45rem;
+      color: var(--text-main);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+
+    .pill {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--accent-soft);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    ul {
+      list-style: none;
+      margin-left: 0.1rem;
+      margin-top: 0.3rem;
+    }
+
+    li {
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: 0.2rem;
+      font-size: 0.93rem;
+      color: var(--text-main);
+    }
+
+    li::before {
+      content: "•";
+      position: absolute;
+      left: 0.2rem;
+      top: 0;
+      color: var(--accent);
+    }
+
+    .sublabel {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .points-table {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+      gap: 0.35rem 0.75rem;
+      align-items: center;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .points-label {
+      color: var(--text-main);
+    }
+    .points-value {
+      color: var(--accent);
+      text-align: right;
+      font-weight: 600;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        rgba(79, 195, 247, 0),
+        rgba(79, 195, 247, 0.5),
+        rgba(79, 195, 247, 0)
+      );
+      margin: 0.9rem 0 0.8rem;
+      opacity: 0.7;
+    }
+
+    .callout {
+      border-radius: 0.8rem;
+      border: 1px dashed rgba(79, 195, 247, 0.6);
+      background: radial-gradient(circle at top left, rgba(79, 195, 247, 0.12), transparent 60%);
+      padding: 0.75rem 0.9rem;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .callout strong {
+      color: var(--accent);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .footer span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .footer small {
+      display: block;
+      margin-top: 0.25rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="badge">
+        <span class="snowflake">❄️</span>
+        <span>Official Rules</span>
+      </div>
+      <h1 class="title">Snowbase Showdown</h1>
+      <p class="subtitle">Fast · Fair · Boss-Proof Snow Game</p>
+    </header>
+
+    <section class="card">
+      <h2>Overview</h2>
+      <p class="tagline">
+        Snowbase Showdown is a fast, friendly snowball battle where everyone has a
+        base, everyone shares the same ammo station, and scoring is fair and simple.
+      </p>
+      <p>
+        The game is designed so no one can control all the rules. Rounds are short,
+        snowballs are soft, and the focus is on fun, movement, and teamwork.
+      </p>
+      <div class="pill-row">
+        <span class="pill">2–6 Players</span>
+        <span class="pill">Ages ~7+</span>
+        <span class="pill">Snow Required</span>
+        <span class="pill">Low Equipment</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Setup</h2>
+      <p class="sublabel">1. Bases</p>
+      <p>
+        Each player (or team) builds a small snow base:
+      </p>
+      <ul>
+        <li>Knee-height or lower is enough.</li>
+        <li>Just a short wall to duck behind, not a giant fort.</li>
+        <li>Bases should be spaced out but still within throwing distance.</li>
+      </ul>
+
+      <p class="sublabel">2. Ammo Station</p>
+      <p>
+        Build one shared <strong>Ammo Station</strong> in the middle area:
+      </p>
+      <ul>
+        <li>All snowballs come from this pile.</li>
+        <li>No personal snowball stashes or pockets.</li>
+        <li>This makes the game fair and keeps players moving.</li>
+      </ul>
+
+      <p class="sublabel">3. Play Area</p>
+      <ul>
+        <li>Choose an open, safe area with soft snow.</li>
+        <li>No ice patches, roads, or dangerous obstacles.</li>
+        <li>Agree on an outer boundary everyone stays inside.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Scoring</h2>
+      <p>Each gentle snowball hit is worth points:</p>
+      <div class="points-table">
+        <div class="points-label">Hit on jacket or torso</div>
+        <div class="points-value">+1 point</div>
+
+        <div class="points-label">Hit on legs</div>
+        <div class="points-value">+1 point</div>
+
+        <div class="points-label">Hit on hat</div>
+        <div class="points-value">+2 points</div>
+
+        <div class="points-label">Soft, tag-style hit on back</div>
+        <div class="points-value">+3 points</div>
+      </div>
+      <p>
+        First player or team to reach <strong>20 points</strong> wins the match.
+      </p>
+      <p class="note">
+        Safety rule: no aiming at faces or heads on purpose. If a head hit happens
+        by accident, check that the other player is okay, apologize, and keep playing.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Core Rules</h2>
+
+      <p class="sublabel">1. Starting the Round</p>
+      <ul>
+        <li>All players begin behind their own base.</li>
+        <li>Someone calls: <strong>“3… 2… 1… Snowbase!”</strong></li>
+        <li>No throwing until after the call finishes.</li>
+      </ul>
+
+      <p class="sublabel">2. Ammo Rules</p>
+      <ul>
+        <li>Players may only collect snowballs from the shared Ammo Station.</li>
+        <li>You may carry a maximum of <strong>two</strong> snowballs at once
+          (unless a special mode is active).</li>
+        <li>No camping at the Ammo Station—grab and go.</li>
+      </ul>
+
+      <p class="sublabel">3. Base Rules</p>
+      <ul>
+        <li>Your base is a <strong>safe zone</strong>: you can’t be hit while fully behind it.</li>
+        <li>You also may not throw from inside your base—step out to attack.</li>
+        <li>If a snowball hits your base, it doesn’t count as a point.</li>
+      </ul>
+
+      <p class="sublabel">4. After a Hit</p>
+      <ul>
+        <li>If you hit someone, you call out your points (for example, “1 point!”).</li>
+        <li>Then you must return to your base before throwing again.</li>
+        <li>Other players help keep score honestly and fairly.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Special Modes</h2>
+      <p class="sublabel">1. Base Rush</p>
+      <p>
+        Every 30–45 seconds, any player may call:
+        <strong>“Base Rush!”</strong>
+      </p>
+      <ul>
+        <li>For the next 5 seconds, bases are <strong>not</strong> safe.</li>
+        <li>Hits on players at their bases now count for points.</li>
+        <li>After 5 seconds, bases return to being safe zones.</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <p class="sublabel">2. Double Ammo Time</p>
+      <p>
+        Once in a while (e.g., every 60 seconds) someone calls:
+        <strong>“Double Ammo!”</strong>
+      </p>
+      <ul>
+        <li>For the next 10 seconds, players may carry up to <strong>four</strong> snowballs.</li>
+        <li>After that, everyone returns to the normal 2-snowball limit.</li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <p class="sublabel">3. Blizzard</p>
+      <p>
+        Occasionally, a player calls: <strong>“Blizzard!”</strong>
+      </p>
+      <ul>
+        <li>All players must crouch, duck, or hide behind their base for 5 seconds.</li>
+        <li>No throwing and no moving during the blizzard.</li>
+        <li>After 5 seconds, someone calls: <strong>“Blizzard over!”</strong> and play continues.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Winning & Variations</h2>
+      <p>
+        Standard game: first team or player to reach <strong>20 points</strong> wins.
+      </p>
+
+      <p class="sublabel">Tie Breaker</p>
+      <ul>
+        <li>If two players or teams reach 20 points in the same round, run a
+          1-on-1 showdown.</li>
+        <li>Both start at their bases, sprint to the Ammo Station, and first hit wins.</li>
+      </ul>
+
+      <p class="sublabel">Quick Match</p>
+      <ul>
+        <li>Play to 10 points for a shorter game.</li>
+        <li>Great for when it’s very cold or getting dark soon.</li>
+      </ul>
+
+      <p class="sublabel">Co-op Mode</p>
+      <ul>
+        <li>Everyone versus a single “Snow Boss” player with extra health (e.g., 40 points).</li>
+        <li>The group works together to reach the boss’s health total with hits.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Safety & Fair Play</h2>
+      <div class="callout">
+        <strong>Safety first:</strong> Snowbase Showdown should always be played with
+        soft snow, gentle throws, and no ice or dangerous objects mixed in. If anyone
+        says “stop” or “time out,” the game pauses immediately.
+      </div>
+      <ul>
+        <li>Throw gently—this is not a power contest.</li>
+        <li>No ice chunks, rocks, or hard objects in snowballs.</li>
+        <li>No aiming at faces on purpose.</li>
+        <li>If someone falls or gets hurt, scoring stops until they’re okay.</li>
+        <li>Be honest about hits and points—fair play beats winning.</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <span>Snowbase Showdown</span>
+      <small>A custom snow game created by kids, for kids. Have fun, stay kind, play fair.</small>
+    </footer>
+  </div>
+</body>
+</html>
